@@ -5,33 +5,32 @@ using namespace std;
 class Solution
 {
 public:
-    int maxProduct(vector<int> &a)
+    bool increasingTriplet(vector<int> &nums)
     {
-
-        int i, max1, max2;
-        max1 = max2 = INT_MIN;
-        for (int i = 0; i < a.size(); i++)
+        int a = INT_MAX, b = INT_MAX;
+        for (auto n : nums)
         {
-            if (a[i] > max1)
+            if (n <= a)
             {
-                max2 = max1;
-                max1 = a[i];
+                a = n;
             }
-            else if (a[i] > max2)
+            else if (n <= b)
             {
-                max2 = a[i];
+                b = n;
+            }
+            else
+            {
+                return true;
             }
         }
-        int ans = (max1 - 1) * (max2 - 1);
-        return ans;
+        return false;
     }
 };
 
-// Driver Code
 int main()
 {
     int N;
-    int result;
+    bool result{false};
 
     cout << "enter number of element in array \n";
     cin >> N;
@@ -46,7 +45,9 @@ int main()
 
     Solution obj1;
 
-    result = obj1.maxProduct(vec);
+    result = obj1.increasingTriplet(vec);
+
+    std::cout << std::boolalpha; // print bools as true or false
 
     cout << '\n'
          << result;
@@ -57,8 +58,8 @@ int main()
 /* 
 Complexity:
 for solution class
-Time: O(n)
-Space: O(1)
+Time: O(1)
+Space: O()
 
 to do --when input size not known of array
 */
